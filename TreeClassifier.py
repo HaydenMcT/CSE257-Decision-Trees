@@ -46,14 +46,6 @@ class TreeClassifier: #tree classifier of specified structure
             print("splitting a non-terminal node... path ended before leaf found")
         to_split.split(rule, rule_name, left, right)
 
-    # identify leaves by path?
-    # def get_leaves(self): 
-    #     if self.terminal: 
-    #         return [[]]
-        
-    #     leaves = []
-    #     leaves.append(self.left.get_leaves)
-
     def get_leaf_paths(self): 
         if self.terminal: 
             return [[]]
@@ -76,21 +68,17 @@ class TreeClassifier: #tree classifier of specified structure
                 self.right.build(train) 
             else: 
                 true_idcs = np.where(np.apply_along_axis(self.rule, 1, train))[0]
-                #print(true_idcs)
                 left_data = np.delete(train, true_idcs, axis=0)
-                #print(left_data)
                 right_data = train[true_idcs, :]
-                #print(right_data)
                 self.left.build(left_data)
                 self.right.build(right_data)
 
-    def predict_one(self, prediction_point): #prediction_point is just one row, not a dataset?
+    def predict_one(self, prediction_point): #prediction_point is just one row, not a dataset
         if self.terminal: 
-            #print(mode(self.train_data[:,-1], axis=None)[0])
             if self.train_data.size == 0: 
-                return 0 #with no data predict 0?
+                return 0 #with no data predict 0
             else: 
-                return mode(self.train_data[:,-1], axis=None)[0][0] #train_data has its last column as the labels (0 or 1)
+                return mode(self.train_data[:,-1], axis=None)[0][0] #ASSUMES train_data has its last column as the labels (0 or 1)
         else: 
             if self.rule(prediction_point):
                 return self.right.predict_one(prediction_point)
@@ -100,14 +88,12 @@ class TreeClassifier: #tree classifier of specified structure
     def predict(self, prediction_points): #prediction_points are all rows
         predictions = np.zeros(prediction_points.shape[0])
         for idx, prediction_point in enumerate(prediction_points): 
-            predictions[idx] = self.predict_one(prediction_point) #inefficient...
+            predictions[idx] = self.predict_one(prediction_point) #todo: improve efficiency
         return predictions
 
 
     def objective(self, leaf_penalty): 
         return (1 - np.mean(self.predict(self.train_data) == self.train_data[:, -1])) + leaf_penalty * self.num_leaves()
-        # if self.terminal: 
-        #     return np.mean(
     
     def height(self): 
         if self.terminal: 
@@ -134,7 +120,7 @@ class TreeClassifier: #tree classifier of specified structure
                 # print(mode(self.train_data[:,-1], axis=None)[0])
                 
         else: 
-            print(printable_indent + "if "+ self.rule_name +" is true: " ) #turn rule to string!
+            print(printable_indent + "if "+ self.rule_name +" is true: " ) #todo: turn rule into more descriptive string
             self.right.print(indent+2, show_data)
             print(printable_indent + "else: ")
             self.left.print(indent + 2, show_data)
