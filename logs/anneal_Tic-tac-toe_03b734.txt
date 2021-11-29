@@ -1,0 +1,12 @@
+hyperparams: 
+{'itrs': 2000, 'leaf_penalty': 0.0005, 'max_depth': 3, 'temp': 1, 'contract': 0.05, 'split': 0.1, 'scaling': 'linear'}
+total time: 568.6599482
+final objective: 0.29586325678496866
+final tree: 
+if feature 13 is true: 
+  if feature 2 is true: 
+    predict 1.0
+  else: 
+    predict 0.0
+else: 
+  predict 1.0

@@ -24,7 +24,7 @@ if __name__=='__main__':
     parser.add_argument('--data', '-d', type=int, help="dataset to use (0=synthetic, 1=tic-tac-toe)", default=0)
     parser.add_argument('--itrs', '-i', type=int, help="number of iterations to run", default=1000)
     parser.add_argument('--max_depth', '-m', type=int, help="maximum depth of tree (1 corresponds to just a root, no splits)", default=3)
-    parser.add_argument('--leaf_penalty', '-l', type=int, help="penalty to objective per leaf in tree", default=0.01)
+    parser.add_argument('--leaf_penalty', '-l', type=float, help="penalty to objective per leaf in tree", default=0.01)
     parser.add_argument('--initial_temp', '-t', type=int, help="Starting temperature", default=1)
     parser.add_argument('--prob_contract', '-c', type=int, help="probability to contract a split when proposing a new tree", default=0.05)
     parser.add_argument('--prob_split', '-s', type=int, help="probability to create a split when proposing a new tree", default=0.1)
@@ -84,7 +84,7 @@ if __name__=='__main__':
     plt.xticks(np.arange(0, len(objectives), int(num_its/10)))
     plt.xlabel('Iteration')
     plt.ylabel('Objective')
-    plt.title('Objective vs Iteration for Simulated Annealing \n (Where Objective = Training Error + {:.2f}'.format(leaf_penalty) + ' * {# leaves}) \n on a ' + DATASET_TXT[dataset]  + ' dataset ' +  '({:d} Features, {:d} Examples)'.format(data.shape[1] -1, data.shape[0])) # (4 Features, 5 Examples)
+    plt.title('Objective vs Iteration for Simulated Annealing \n (Where Objective = Training Error + {:.4g}'.format(leaf_penalty) + ' * {# leaves}) \n on a ' + DATASET_TXT[dataset]  + ' dataset ' +  '({:d} Features, {:d} Examples)'.format(data.shape[1] -1, data.shape[0])) # (4 Features, 5 Examples)
     #show hyperparams on slide in small font, discuss how simple it is?
     plt.savefig('figs/anneal_itrs_' + DATASET_TXT[dataset] + '_' + str(hash) + '.png')
     plt.show()
