@@ -1,0 +1,7 @@
+total time: 130.4438733
+final objective: 0.3206263048016702
+final tree: 
+if feature 13 is true: 
+  predict 0.0
+else: 
+  predict 1.0

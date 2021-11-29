@@ -1,0 +1,8 @@
+Dataset taken from https://github.com/aia-uclouvain/pydl8.5/blob/master/datasets/tic-tac-toe.txt with the columns explained at https://dtai.cs.kuleuven.be/CP4IM/datasets/data/tic-tac-toe.txt
+My understanding when working with this dataset has been that: 
+floor((0-based column index)/3) corresponds to the tile number (0 is top left, 8 is bottom right)
+(0-based column index) % 3  corresponds to the value in the cell (0 = blank, 1 = O, 2 = X)
+the last column is the true labels, where 1 corresponds to X winning and 0 corresponds to X either losing or drawing (so that the labels are binary)
+
+I chose this dataset because we have been using tic-tac-toe in a recent assignment to discuss MDP formulations and value iteration. For Q-learning, one could imagine expanding this dataset to include non-terminal states and their values, in order to train a model to learn a function for the value of each state instead of encoding that as a table. 
+A significant drawback is that there are no equivalent points (observations with the same feature values but different true labels), which is something that optimal decision tree algorithms often have to deal with (it guarantees the lowest possible training error is not 0). 

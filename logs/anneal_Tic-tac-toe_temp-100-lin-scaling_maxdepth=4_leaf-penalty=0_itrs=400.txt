@@ -1,0 +1,13 @@
+total time: 109.283569
+final objective: 0.21398747390396655
+final tree: 
+if feature 26 is true: 
+  predict 0.0
+else: 
+  if feature 20 is true: 
+    if feature 16 is true: 
+      predict 1.0
+    else: 
+      predict 1.0
+  else: 
+    predict 1.0
